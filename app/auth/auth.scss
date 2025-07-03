@@ -1,0 +1,99 @@
+@import "../home.scss";
+
+
+.form-container {
+    width: 100%;
+    @include flex-center;
+
+    form {
+        margin-top: 50px;
+        border: 2px solid black;
+        border-radius: 10px;
+        height: 300px;
+        width: 400px;
+        padding: 20px;
+        box-shadow: 0px 0px 20px 0px rgb(126, 126, 126);
+        position: relative;
+
+        input {
+            width: 100%;
+            height: 40px;
+            border: 2px solid black;
+            padding-left: 10px;
+            border-radius: 10px;
+            font-weight: 600;
+
+        }
+
+        .error-text {
+            color: rgb(187, 0, 0);
+            font-size: 18px;
+            text-align: left;
+            margin-top: 10px;
+            font-weight: 600;
+
+        }
+
+        .success-text {
+            color: rgb(0, 187, 22);
+            font-size: 18px;
+            font-weight: 600;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        button {
+            @extend input;
+            margin-top: 20px;
+            @include flex-center;
+            transition: 0.3s;
+
+
+            &:hover {
+                background-color: black;
+                color: white;
+            }
+        }
+
+        .lds-dual-ring {
+            /* change color here */
+            color: #aa00ff;
+            margin-top: 40px;
+        }
+
+        .lds-dual-ring,
+        .lds-dual-ring:after {
+            box-sizing: border-box;
+        }
+
+        .lds-dual-ring {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+        }
+
+        .lds-dual-ring:after {
+            content: " ";
+            display: block;
+            width: 64px;
+            height: 64px;
+            margin: 8px;
+            border-radius: 50%;
+            border: 6.4px solid currentColor;
+            border-color: currentColor transparent currentColor transparent;
+            animation: lds-dual-ring 1.2s linear infinite;
+        }
+    }
+}
+
+
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

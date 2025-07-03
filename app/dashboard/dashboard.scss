@@ -1,0 +1,18 @@
+.user-details{
+    border: 2px solid purple;
+    border-radius: 10px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    p{
+        font-weight: 600;
+        font-size: 20px;
+    }
+    img{
+        width: 80px;
+        border-radius: 50%;
+    }
+}

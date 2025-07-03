@@ -1,0 +1,277 @@
+// Variables
+$primary: #4361ee;
+$secondary: #3a0ca3;
+$accent: #f72585;
+$light: #f8f9fa;
+$dark: #212529;
+$transition: 0.3s;
+
+
+@mixin button-hover {
+    &::before {
+        content: '';
+        background: linear-gradient(90deg, #3a0ca3, #df0366);
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        width: 0;
+        height: 150%;
+        z-index: -10;
+        transform: skewX(-20deg);
+        transition: width 0.5s ease;
+    }
+
+    &:hover::before {
+        width: 120%;
+    }
+
+    &:hover {
+        border: 2px solid $secondary;
+        color: white;
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-page {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $light;
+    color: $dark;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    .bg-animation {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 20% 50%, rgba($primary, 0.1), transparent 30%),
+            radial-gradient(circle at 80% 30%, rgba($accent, 0.1), transparent 30%);
+        animation: float 15s infinite ease-in-out alternate;
+    }
+
+    .main-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding: 2rem;
+        max-width: 800px;
+        width: 90%;
+
+        .page-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, $primary, $accent);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: fadeIn 1s ease-out;
+
+            span {
+                font-weight: 800;
+            }
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: lighten($dark, 20%);
+            animation: fadeIn 1s ease-out 0.2s both;
+        }
+
+        .links-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+
+            .nav-link {
+                position: relative;
+                text-decoration: none;
+                color: $dark;
+                width: 220px;
+                height: 120px;
+                border-radius: 12px;
+                background: white;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                transition: all $transition ease;
+                overflow: hidden;
+                animation: fadeInUp 0.8s ease-out 0.4s both;
+
+                &:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+                }
+
+                &.active {
+                    .hover-effect {
+                        opacity: 1;
+                        transform: scaleX(1);
+                    }
+                }
+
+                .link-content {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100%;
+                    position: relative;
+                    z-index: 2;
+                    padding: 1.5rem;
+
+                    .link-icon {
+                        font-size: 2.5rem;
+                        margin-bottom: 0.8rem;
+                        transition: transform $transition ease;
+                    }
+
+                    .link-text {
+                        font-size: 1.1rem;
+                        font-weight: 600;
+                        transition: color $transition ease;
+                    }
+
+                    .hover-effect {
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 4px;
+                        background: $accent;
+                        opacity: 0;
+                        transform: scaleX(0);
+                        transform-origin: left;
+                        transition: all $transition ease;
+                    }
+                }
+
+                &:nth-child(2) {
+                    animation-delay: 0.6s;
+                }
+            }
+        }
+    }
+
+    .notification {
+        position: fixed;
+        bottom: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: transparent;
+        border: 2px solid rgba($dark, 0.8);
+        padding: 0.8rem 1.5rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        animation: fadeIn 1s ease-out 1s both;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        @include flex-center;
+        text-align: center;
+        transition: 0.3s;
+        color: black;
+        font-weight: 600;
+        overflow: hidden;
+
+        @include button-hover;
+
+    }
+}
+
+@media (max-height: 680px) {
+    .home-page {
+        .notification {
+            bottom: 10px;
+        }
+    }
+}
+@media (max-height: 600px) {
+    .home-page {
+        .notification {
+            display: none;
+        }
+    }
+}
+
+// Animations
+@keyframes float {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(10px, 10px);
+    }
+
+    100% {
+        transform: translate(-10px, -10px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+.modal-parent {
+    @include flex-center;
+
+    // width: 500px;
+    .modal-box {
+        padding: 20px;
+        width: 800px;
+        background-color: white;
+        border-radius: 8px;
+        border: none;
+
+        #parent-modal-description {
+            font-size: 17px;
+        }
+    }
+}
+
+@media (max-width: 850px) {
+    .modal-parent {
+        .modal-box {
+            padding: 20px;
+            width: 90%;
+
+            #parent-modal-description {
+                font-size: 16px;
+            }
+        }
+    }
+}
